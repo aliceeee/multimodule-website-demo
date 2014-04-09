@@ -27,9 +27,7 @@ multimodule-website-demo
 # Maven多模块
 
 - 继承
-即pom文件中用<parent/>
-
-见上
+即pom文件中用<parent/>。见上
 
 
 - 依赖
@@ -57,13 +55,15 @@ multimodule-website-demo
 ```
 
 - TODO
--- Dependency Management 进一步优化
--- 问题：所有web项目的依赖是否需要独立写一个项目pom来管理
+Dependency Management 进一步优化
+
+- 问题
+所有web项目的依赖是否需要独立写一个项目pom来管理
 
 # Spring Context
-web-total 使用maven-war-plugin插件来依赖其他war（如这里的account-web和cart-web）
+web-total 使用maven-war-plugin插件来依赖其他war（如这里的account-web和cart-web）。
 插件会把依赖的war的内容合并，合并是排除其他项目的以下文件，并以web-total的配置文件为最优先
-	WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml
+```WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml```
 如下
 ```
 account-web
@@ -97,8 +97,8 @@ web-total
 ```
 
 其中
-每个项目有自己的数据库连接是为了项目开发时可以单独部署
-servlet-context-*配置各个项目自己需要的东西，最后在web-total中同时生效（如何避免冲突？制订命名规范）
+1.每个项目有自己的数据库连接是为了项目开发时可以单独部署
+2.servlet-context-*配置各个项目自己需要的东西，最后在web-total中同时生效（如何避免冲突？制订命名规范）
 
 # 单元测试
 TODO
