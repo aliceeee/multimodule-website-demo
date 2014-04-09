@@ -3,7 +3,7 @@ A Spring MVC with Maven Multi-Module and Spring Security （draft）
 
 # 文件结构
 project
-'''
+```
 multimodule-website-demo
   |- account
 
@@ -22,7 +22,7 @@ multimodule-website-demo
   |- web-total（war）
 
   \- core（jar）
-'''
+```
 
 # Maven多模块
 
@@ -35,7 +35,7 @@ multimodule-website-demo
 - 依赖
 即pom文件中用<dependency/>引入
 
-'''
+```
 multimodule-website-demo
   |- account
 
@@ -54,7 +54,7 @@ multimodule-website-demo
   |- web-total（account-service, cart-service）
 
   \- core
-'''
+```
 
 - TODO
 Dependency Management 进一步优化
@@ -65,7 +65,7 @@ web-total 使用maven-war-plugin插件来依赖其他war（如这里的account-w
 插件会把依赖的war的内容合并，合并是排除其他项目的以下文件，并以web-total的配置文件为最优先
 	WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml
 如下
-'''
+```
 account-web
 ...WEB-INF
      |- spring
@@ -94,6 +94,7 @@ web-total
      |    |- spring-security.xml
      \    \- sprint-hsqldb.xml (web-total's)
 ...web.xml
+```
 
 其中
 每个项目有自己的数据库连接是为了项目开发时可以单独部署
@@ -102,5 +103,4 @@ servlet-context-*配置各个项目自己需要的东西，最后在web-total中
 # 单元测试
 TODO
 
-'''
 
