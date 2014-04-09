@@ -57,8 +57,8 @@ multimodule-website-demo
 ```
 
 - TODO
-Dependency Management 进一步优化
-问题：所有web项目的依赖是否需要独立写一个项目pom来管理
+-- Dependency Management 进一步优化
+-- 问题：所有web项目的依赖是否需要独立写一个项目pom来管理
 
 # Spring Context
 web-total 使用maven-war-plugin插件来依赖其他war（如这里的account-web和cart-web）
