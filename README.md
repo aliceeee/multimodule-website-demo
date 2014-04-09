@@ -1,6 +1,10 @@
 A Spring MVC with Maven Multi-Module and Spring Security （draft）
 ========================
 
+# 环境
+
+demo项目，使用HSQL作为数据库，jetty做为web服务器
+
 # 文件结构
 project
 ```
@@ -107,4 +111,14 @@ web-total
 # 单元测试
 TODO
 
+
+# 运行项目
+在项目目录下运行
+```
+mvn clean install
+```
+进入web-total， 运行
+```
+mvn jetty:run
+```
 
