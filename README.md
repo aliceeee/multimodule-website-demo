@@ -63,8 +63,12 @@ Dependency Management 进一步优化
 # Spring Context
 web-total 使用maven-war-plugin插件来依赖其他war（如这里的account-web和cart-web）。
 插件会把依赖的war的内容合并，合并是排除其他项目的以下文件，并以web-total的配置文件为最优先
-```WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml```
+```
+WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml
+```
+
 如下
+
 ```
 account-web
 ...WEB-INF
