@@ -1,0 +1,25 @@
+A Spring MVC with Maven Multi-Module and Spring Security （draft）
+========================
+
+# 文件结构
+project
+'''
+  |- account
+
+  |    |- account-service
+
+  |    \- account-web
+
+  |- cart
+
+  |    |- cart-service
+
+  |    \- cart-web
+
+  |- ...
+
+  |- web-total（war）
+
+  \- core（jar）
+'''
+  

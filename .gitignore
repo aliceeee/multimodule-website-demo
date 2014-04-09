@@ -1,5 +1,9 @@
-**/.project
-**/.settings
-**/target/**
-**/.classpath
-**/.springBeans
+.settings
+.project
+/cart/.project
+/cart/.settings
+/web-total/.project
+/web-total/.classpath
+/web-total/target
+/web-total/.settings
+/web-total/.springBeans

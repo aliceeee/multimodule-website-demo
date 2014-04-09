@@ -61,12 +61,25 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>3.0.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>3.0.0.RELEASE</version>
+		</dependency>
+
+		<!-- Spring: for embedded-database -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
 		</dependency>
 
 		<!-- AspectJ -->
@@ -215,9 +228,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
+					<dependentWarExcludes>WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml</dependentWarExcludes>
 					<!-- Install Jar and War in maven repository at the same time -->
 					<!-- <attachClasses>true</attachClasses> -->
-					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+					<!-- http://maven.apache.org/plugins/maven-war-plugin/overlays.html -->
 					<overlays>
 						<overlay>
 							<groupId>org.alice.app</groupId>
@@ -226,6 +240,9 @@
 						<overlay>
 							<groupId>org.alice.app</groupId>
 							<artifactId>cart-web</artifactId>
+						</overlay>
+						<overlay>
+							<!-- empty groupId/artifactId represents the current build -->
 						</overlay>
 					</overlays>
 				</configuration>
