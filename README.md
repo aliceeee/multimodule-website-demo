@@ -1,6 +1,8 @@
 A Spring MVC with Maven Multi-Module and Spring Security （draft）
 ========================
 
+[![Build Status](https://travis-ci.org/aliceeee/multimodule-website-demo.svg?branch=master)](https://travis-ci.org/aliceeee/multimodule-website-demo)
+
 # 环境
 
 demo项目，使用HSQL作为数据库，jetty做为web服务器
