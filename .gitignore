@@ -7,3 +7,5 @@
 /web-total/target
 /web-total/.settings
 /web-total/.springBeans
+target
+/account/account-service/target
