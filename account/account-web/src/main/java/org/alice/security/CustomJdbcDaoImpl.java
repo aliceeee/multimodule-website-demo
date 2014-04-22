@@ -20,33 +20,33 @@ public class CustomJdbcDaoImpl extends JdbcDaoImpl implements IChangePassword {
 	private SaltSource saltSource;
 
 	public void changePassword(String username, String password) {
-//		UserDetails user = loadUserByUsername(username);
-//		String encodedPassword = passwordEncoder.encodePassword(password, saltSource.getSalt(user));
-//		getJdbcTemplate().update("UPDATE USERS SET PASSWORD = ? WHERE USERNAME = ?", encodedPassword, username);
+		UserDetails user = loadUserByUsername(username);
+		String encodedPassword = passwordEncoder.encodePassword(password, saltSource.getSalt(user));
+		getJdbcTemplate().update("UPDATE USERS SET PASSWORD = ? WHERE USERNAME = ?", encodedPassword, username);
 	}
 
-//	@Override
-//	protected UserDetails createUserDetails(String username, UserDetails userFromUserQuery, List<GrantedAuthority> combinedAuthorities) {
-//		String returnUsername = userFromUserQuery.getUsername();
-//
-//		if (!isUsernameBasedPrimaryKey()) {
-//			returnUsername = username;
-//		}
-//
-//		return new SaltedUser(returnUsername, userFromUserQuery.getPassword(), userFromUserQuery.isEnabled(), true, true, true, combinedAuthorities,
-//				((SaltedUser) userFromUserQuery).getSalt());
-//	}
-//
-//	@Override
-//	protected List<UserDetails> loadUsersByUsername(String username) {
-//		return getJdbcTemplate().query(getUsersByUsernameQuery(), new String[] { username }, new RowMapper<UserDetails>() {
-//			public UserDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
-//				String username = rs.getString(1);
-//				String password = rs.getString(2);
-//				boolean enabled = rs.getBoolean(3);
-//				String salt = rs.getString(4);
-//				return new SaltedUser(username, password, enabled, true, true, true, AuthorityUtils.NO_AUTHORITIES, salt);
-//			}
-//		});
-//	}
+	@Override
+	protected UserDetails createUserDetails(String username, UserDetails userFromUserQuery, List<GrantedAuthority> combinedAuthorities) {
+		String returnUsername = userFromUserQuery.getUsername();
+
+		if (!isUsernameBasedPrimaryKey()) {
+			returnUsername = username;
+		}
+
+		return new SaltedUser(returnUsername, userFromUserQuery.getPassword(), userFromUserQuery.isEnabled(), true, true, true, combinedAuthorities,
+				((SaltedUser) userFromUserQuery).getSalt());
+	}
+
+	@Override
+	protected List<UserDetails> loadUsersByUsername(String username) {
+		return getJdbcTemplate().query(getUsersByUsernameQuery(), new String[] { username }, new RowMapper<UserDetails>() {
+			public UserDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
+				String username = rs.getString(1);
+				String password = rs.getString(2);
+				boolean enabled = rs.getBoolean(3);
+				String salt = rs.getString(4);
+				return new SaltedUser(username, password, enabled, true, true, true, AuthorityUtils.NO_AUTHORITIES, salt);
+			}
+		});
+	}
 }

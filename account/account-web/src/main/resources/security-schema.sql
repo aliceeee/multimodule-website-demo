@@ -9,12 +9,12 @@
 
 SET IGNORECASE TRUE;
 
-CREATE TABLE users (
-    username VARCHAR(50) NOT NULL PRIMARY KEY,
-    password VARCHAR(50) NOT NULL,
-    enabled BIT NOT NULL,
-    salt varchar(50)
-);
+create table users(    
+  username varchar_ignorecase(50) not null primary key,    
+  password varchar_ignorecase(50) not null,    
+  enabled boolean not null,    
+  salt varchar_ignorecase(25) not null    
+  ); 
 
   create table authorities (
       username varchar_ignorecase(50) not null,
