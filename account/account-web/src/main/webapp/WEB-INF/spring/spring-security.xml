@@ -13,6 +13,10 @@
 		<beans:property name="enableAuthorities" value="false" />
 	</beans:bean>
 
+	<beans:bean
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"
+		id="passwordEncoder" />
+
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/*" access="hasRole('ROLE_USER') " />
@@ -24,8 +28,16 @@
 
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="jdbcUserService">
-			
+			<password-encoder ref="passwordEncoder">
+			</password-encoder>
 		</authentication-provider>
 	</authentication-manager>
+
+	<beans:bean
+		class="org.alice.security.DatabasePasswordSecurerBean"
+		init-method="secureDatabase" depends-on="dataSource">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="passwordEncoder" ref="passwordEncoder" />
+	</beans:bean>
 
 </beans:beans>  

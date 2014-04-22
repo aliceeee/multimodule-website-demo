@@ -18,4 +18,10 @@
 		<jdbc:script location="classpath:test-data.sql" />
 	</jdbc:embedded-database>
 
+	<beans:bean
+		class="org.springframework.security.authentication.dao.ReflectionSaltSource"
+		id="saltSource">
+		<beans:property name="userPropertyToUse" value="username" />
+	</beans:bean>
+
 </beans:beans>

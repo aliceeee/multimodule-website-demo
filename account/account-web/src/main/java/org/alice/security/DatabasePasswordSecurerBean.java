@@ -12,6 +12,14 @@ public class DatabasePasswordSecurerBean extends JdbcDaoSupport {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	public PasswordEncoder getPasswordEncoder() {
+		return passwordEncoder;
+	}
+
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+
 	public void secureDatabase() {
 		getJdbcTemplate().query("select username, password from users", new RowCallbackHandler() {
 			@Override
