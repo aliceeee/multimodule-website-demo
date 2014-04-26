@@ -12,21 +12,13 @@ project
 ```
 multimodule-website-demo
   |- account
-
   |    |- account-service
-
   |    \- account-web（war）
-
   |- cart
-
   |    |- cart-service
-
   |    \- cart-web（war）
-
   |- ...
-
   |- web-total（war）
-
   \- core（jar）
 ```
 
@@ -42,21 +34,13 @@ multimodule-website-demo
 ```
 multimodule-website-demo
   |- account
-
   |    |- account-service (core)
-
   |    \- account-web（account-service）
-
   |- cart
-
   |    |- cart-service (core)
-
   |    \- cart-web（cart-service）
-
   |- ...
-
   |- web-total（account-service, cart-service）
-
   \- core
 ```
 
