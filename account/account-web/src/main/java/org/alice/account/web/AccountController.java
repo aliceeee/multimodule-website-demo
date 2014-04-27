@@ -37,5 +37,10 @@ public class AccountController {
 		SecurityContextHolder.clearContext();
 		return "redirect:/";
 	}
+	
+	// demo for findbugs
+	public Boolean test(){
+		return null;
+	}
 
 }

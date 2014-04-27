@@ -4,19 +4,39 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.alice.app</groupId>
-		<artifactId>cart</artifactId>
+		<artifactId>multimodule-website-demo</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>cart-web</artifactId>
+	<artifactId>web-total</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	
+	<properties>
+		<java-version>1.6</java-version>
+		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.slf4j-version>1.6.6</org.slf4j-version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.alice.app</groupId>
-			<artifactId>cart-service</artifactId>
+			<artifactId>cart-web</artifactId>
+			<type>war</type>
 		</dependency>
-		
+		<!-- if jar is needed -->
+		<!-- <dependency> <groupId>org.alice.app</groupId> <artifactId>cart-web</artifactId> 
+			<type>jar</type> <classifier>classes</classifier> <scope>provided</scope> 
+			</dependency> -->
+
+		<dependency>
+			<groupId>org.alice.app</groupId>
+			<artifactId>account-web</artifactId>
+			<type>war</type>
+		</dependency>
+
+		<!-- if jar is needed -->
+		<!-- <dependency> <groupId>org.alice.app</groupId> <artifactId>account-web</artifactId> 
+			<type>jar</type> <classifier>classes</classifier> <scope>provided</scope> 
+			</dependency> -->
 
 		<!-- Spring -->
 		<dependency>
@@ -41,12 +61,25 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>3.0.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.3.RELEASE</version>
+			<version>3.0.0.RELEASE</version>
+		</dependency>
+
+		<!-- Spring: for embedded-database -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
 		</dependency>
 
 		<!-- AspectJ -->
@@ -132,9 +165,88 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- jetty -->
+		<dependency>
+			<groupId>org.eclipse.jetty.aggregate</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>8.1.14.v20131031</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jsp</artifactId>
+			<version>8.1.14.v20131031</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+					</additionalBuildcommands>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>org.test.int1.Main</mainClass>
+				</configuration>
+			</plugin>
+			<!-- To merge war -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<dependentWarExcludes>WEB-INF/web.xml,index.*,WEB-INF/spring/root-context.xml</dependentWarExcludes>
+					<!-- Install Jar and War in maven repository at the same time -->
+					<!-- <attachClasses>true</attachClasses> -->
+					<!-- http://maven.apache.org/plugins/maven-war-plugin/overlays.html -->
+					<overlays>
+						<overlay>
+							<groupId>org.alice.app</groupId>
+							<artifactId>account-web</artifactId>
+						</overlay>
+						<overlay>
+							<groupId>org.alice.app</groupId>
+							<artifactId>cart-web</artifactId>
+						</overlay>
+						<overlay>
+							<!-- empty groupId/artifactId represents the current build -->
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
